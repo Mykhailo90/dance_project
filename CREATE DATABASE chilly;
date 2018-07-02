@@ -1,0 +1,247 @@
+CREATE DATABASE chilly;
+USE chilly;
+CREATE TABLE members_info
+(
+	members_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	first_name VARCHAR(30) NOT NULL,
+	last_name VARCHAR(30) NOT NULL,
+	gender CHAR (1),
+	school VARCHAR(30) NOT NULL,
+	city VARCHAR (30) NOT NULL,
+	email VARCHAR (30) NOT NULL,
+	phone VARCHAR (15) NOT NULL,
+	foto VARCHAR (50) NOT NULL,
+	checking INT DEFAULT '0',
+	sale INT DEFAULT '0'
+);
+
+CREATE TABLE show_members_info
+(
+	show_members_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	show_name VARCHAR(30) NOT NULL,
+	school VARCHAR(30) NOT NULL,
+	city VARCHAR (30) NOT NULL,
+	email VARCHAR (30) NOT NULL,
+	phone VARCHAR (15) NOT NULL,
+	foto VARCHAR (50) NOT NULL,
+	checking INT DEFAULT '0',
+	sale INT DEFAULT '0'
+);
+
+CREATE TABLE group_members_info
+(
+	group_members_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	school VARCHAR(30) NOT NULL,
+	city VARCHAR (30) NOT NULL,
+	email VARCHAR (30) NOT NULL,
+	phone VARCHAR (15) NOT NULL,
+	foto VARCHAR (50) NOT NULL,
+	checking INT DEFAULT '0',
+	sale INT DEFAULT '0'
+);
+
+CREATE TABLE style_info
+(
+	id_category INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	name_category VARCHAR(30) NOT NULL
+);
+
+CREATE TABLE main_info_solo
+(
+	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	members_id INT NOT NULL,
+	CONSTRAINT members_ifo_members_id_fk
+	FOREIGN KEY (members_id)
+	REFERENCES members_info (members_id),
+	id_category INT NOT NULL,
+	CONSTRAINT style_ifo_id_category_fk
+	FOREIGN KEY (id_category)
+	REFERENCES style_info (id_category)
+);
+
+CREATE TABLE main_info_show
+(
+	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	show_members_id INT NOT NULL,
+	CONSTRAINT show_members_ifo_show_members_id_fk
+	FOREIGN KEY (show_members_id)
+	REFERENCES show_members_info (show_members_id)
+);
+
+CREATE TABLE main_info_group
+(
+	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	group_members_id INT NOT NULL,
+	FOREIGN KEY (group_members_id)
+	REFERENCES group_members_info (group_members_id),
+	id_category INT NOT NULL,
+	FOREIGN KEY (id_category)
+	REFERENCES style_info (id_category)
+);
+
+CREATE TABLE show_members
+(
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY FIRST,
+	first_name VARCHAR(30) NOT NULL,
+	last_name VARCHAR(30) NOT NULL
+	show_members_id INT NOT NULL,
+	FOREIGN KEY (show_members_id)
+	REFERENCES show_members_info (show_members_id)	
+);
+
+
+CREATE TABLE group_members
+(
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	first_name VARCHAR(30) NOT NULL,
+	last_name VARCHAR(30) NOT NULL,
+	group_members_id INT NOT NULL,
+	FOREIGN KEY (group_members_id)
+	REFERENCES group_members_info (group_members_id)	
+);
+
+
+INSERT INTO style_info
+(name_category)
+VALUES
+('Kizomba Beginners');
+
+INSERT INTO style_info
+(name_category)
+VALUES
+('Bachata Beginners');
+
+INSERT INTO style_info
+(name_category)
+VALUES
+('Salsa Casino Beginners');
+
+INSERT INTO style_info
+(name_category)
+VALUES
+('Salsa casino Intermediate');
+
+INSERT INTO style_info
+(name_category)
+VALUES
+('Salsa casino Advanced');
+
+INSERT INTO style_info
+(name_category)
+VALUES
+('Salsa casino Masters');
+
+INSERT INTO style_info
+(name_category)
+VALUES
+('Bachata Intermediate');
+
+INSERT INTO style_info
+(name_category)
+VALUES
+('Bachata Advanced');
+
+INSERT INTO style_info
+(name_category)
+VALUES
+('Bachata Sensual Masters');
+
+INSERT INTO style_info
+(name_category)
+VALUES
+('Bachata Dominicana Masters');
+
+INSERT INTO style_info
+(name_category)
+VALUES
+('Kizomba Intermediate');
+
+INSERT INTO style_info
+(name_category)
+VALUES
+('Kizomba Advanced');
+
+INSERT INTO style_info
+(name_category)
+VALUES
+('Urban Kiz Masters');
+
+INSERT INTO style_info
+(name_category)
+VALUES
+('Tarraxina Masters');
+
+INSERT INTO style_info
+(name_category)
+VALUES
+('Traditional Kizomba Masters');
+
+ALTER TABLE show_members_info
+ADD COLUMN cheef VARCHAR(30) AFTER show name;
+
+#//
+
+INSERT INTO members_info
+(first_name, last_name, gender, school, city, email, phone, foto)
+VALUES
+('Михаил', 'Сарапий', 'М', 'Chilli-Dance studio', 'Kyiv', '0660330233@ukr.net', '+308730507755', 'http://www.pit4sport.com.ua/wp-content/uploads/2015/12/Pit4Sport_logo-e1449069029336.png');
+
+INSERT INTO main_info_solo
+(members_id, id_category)
+VALUES
+('1', '2');
+
+INSERT INTO main_info_solo
+(members_id, id_category)
+VALUES
+('1', '3');
+
+
+#// Схема добавления группы
+
+INSERT INTO group_members_info
+(school, city, email, phone, foto)
+VALUES
+('Chilli-Dance studio', 'Kyiv', '0660330233@ukr.net', '+308730507755', 'http://www.pit4sport.com.ua/wp-content/uploads/2015/12/Pit4Sport_logo-e1449069029336.png'),
+('Chilli-Dance studio', 'Kyiv', '0730507755@ukr.net', '+308730507755', 'http://www.pit4sport.com.ua/wp-content/uploads/2015/12/Pit4Sport_logo-e1449069029336.png'),
+;
+
+
+INSERT INTO main_info_group
+(group_members_id, id_category)
+VALUES
+('1', '2'),
+('2', '2');
+
+INSERT INTO group_members
+(group_members_id, first_name, last_name)
+VALUES
+(1, 'Михаил', 'Сарапий'),
+(1, 'Оксана', 'Сарапий'),
+(2, 'Василий', 'Вишняков'),
+(2, 'Лана', 'Вишнякова');
+
+
+
+#// Схема добавления информации для шоугруппы
+
+INSERT INTO show_members_info
+(show name, cheef, school, city, email, phone, foto)
+VALUES
+('Крутые перцы', 'Лана Вишнякова', 'Chilli-Dance studio', 'Kyiv', '0660330233@ukr.net', '+308730507755', 'http://www.pit4sport.com.ua/wp-content/uploads/2015/12/Pit4Sport_logo-e1449069029336.png'),
+('Очень крутые перцы', 'Василий Вишняков', 'Chilli-Dance studio', 'Kyiv', '0730507755@ukr.net', '+308730507755', 'http://www.pit4sport.com.ua/wp-content/uploads/2015/12/Pit4Sport_logo-e1449069029336.png');
+
+INSERT INTO show_members
+(show_members_id, first_name, last_name)
+VALUES
+(1, 'Михаил', 'Сарапий'),
+(1, 'Оксана', 'Сарапий'),
+(1, 'Ира', 'Сарапий'),
+(1, 'Славик', 'Сарапий'),
+(2, 'Василий', 'Вишняков'),
+(2, 'Лана', 'Вишнякова'),
+(2, 'Оля', 'Вишнякова');
+
+
+
+

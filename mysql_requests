@@ -1,0 +1,391 @@
+CREATE DATABASE my_database;
+USE my_database;
+CREATE TABLE my_contacts
+(
+	contact_id INT NOT NULL AUTO_INCREMENT
+	last_name VARCHAR(30) NOT NULL,
+	first_name VARCHAR(20) NOT NULL,
+	email VARCHAR(50) NOT NULL,
+	gender CHAR(1) NOT NULL,
+	birthday DATE NOT NULL,
+	profession VARCHAR(50) NOT NULL,
+	location VARCHAR(50) NOT NULL,
+	status VARCHAR(20) NOT NULL,
+	interests VARCHAR(100) NOT NULL,
+	seeking VARCHAR(100) NOT NULL,
+	PRIMARY KEY (contact_id)
+);
+
+DROP TABLE my_contacts;
+
+INSERT INTO my_contacts
+(last_name, first_name, email, gender, birthday, profession, location, status, interests, seeking)
+VALUES 
+('Андерсон', 'Джиллиан', 'jill_anderson@breackneckpizza.com', 'ж', '1980-05-09', 'Писатель',
+'Пало-Альто, CA', 'Не замужем', 'Каяк, террариум', 'Друзья');
+
+CREATE TABLE easy_drinks
+(
+	drink_name VARCHAR(30) NOT NULL,
+	main VARCHAR(30) NOT NULL,
+	amount1 DECIMAL(3, 2) NOT NULL,
+	second VARCHAR(30) NOT NULL,
+	amount2 DECIMAL(3, 2) NOT NULL,
+	directions BLOB NOT NULL	
+);
+
+INSERT INTO easy_drinks
+(drink_name, main, amount1, second, amount2, directions)
+VALUES
+('Терновник', 'тоник', '1.5', 'ананасовый сок', '1', 'взболтать со льдом, разлить по бокалам, украсить лимонной цедрой');
+
+INSERT INTO easy_drinks
+(drink_name, main, amount1, second, amount2, directions)
+VALUES
+('Голубая лагуна', 'содовая', '1.5', 'черничный сок', '0.75', 'взболтать со льдом, разлить по бокалам, украсить лимонной цедрой');
+
+INSERT INTO easy_drinks
+(drink_name, main, amount1, second, amount2, directions)
+VALUES
+('Вот тебе на', 'персиковый нектар', '1', 'ананасовый сок', '1', 'взболтать со льдом, разлить по стаканам');
+
+INSERT INTO easy_drinks
+(drink_name, main, amount1, second, amount2, directions)
+VALUES
+('Лаймовый Физз', 'спрайт', '1.5', 'сок лайма', '0.75', 'взболтать со льдом, разлить по бокалам');
+
+INSERT INTO easy_drinks
+(drink_name, main, amount1, second, amount2, directions)
+VALUES
+('Поцелуй', 'вишневый сок', '2', 'абрикосовый нектар', '7', 'подавать со льдом и соломинкой');
+
+INSERT INTO easy_drinks
+(drink_name, main, amount1, second, amount2, directions)
+VALUES
+('Горячее золото', 'персиковый нектар', '3', 'апельсиновый сок', '6', 'влить в кружку гарячий апельсиновый сок, добавить персиковый нектар');
+
+INSERT INTO easy_drinks
+(drink_name, main, amount1, second, amount2, directions)
+VALUES
+('Одинокое дерево', 'содовая', '1.5', 'вишневый сок', '0.75', 'взболтать со льдом, разлить по бокалам');
+
+INSERT INTO easy_drinks
+(drink_name, main, amount1, second, amount2, directions)
+VALUES
+('Борзая', 'содовая', '1.5', 'грейпфрутовый сок', '5', 'подовать со льдом, тщательно взболтать');
+
+INSERT INTO easy_drinks
+(drink_name, main, amount1, second, amount2, directions)
+VALUES
+('Бабье лето', 'яблочный сок', '2', 'горячий чай', '6', 'налить сок в кружку, добавить горячий чай');
+
+INSERT INTO easy_drinks
+(drink_name, main, amount1, second, amount2, directions)
+VALUES
+('Лягушка', 'Холодный чай', '1.5', 'лимонад', '5', 'подавать на льду с ломтиком лайма');
+
+INSERT INTO easy_drinks
+(drink_name, main, amount1, second, amount2, directions)
+VALUES
+('Сода плюс', 'содовая', '2', 'виноградный сок', '1', 'взболтать в бокале, подавать без льда');
+
+
+SELECT drink_name, main, second
+FROM easy_drinks
+WHERE main = 'содовая';
+
+
+
+INSERT INTO doughnut_ratings
+(location, time, date, type, rating, comments)
+VALUES
+('Starbuzz Coffee', '7:43', '23/4', 'с коррицей', '6', 'слишком много пряностей');
+
+INSERT INTO doughnut_ratings
+(location, time, date, type, rating, comments)
+VALUES
+('Duncan\'s Donuts', '8:56', '25/8', 'с глазурью', '5', 'жирноваты');
+
+INSERT INTO doughnut_ratings
+(location, time, date, type, rating, comments)
+VALUES
+('Duncan\'s Donuts', '19:58', '26/4', 'с вареньем', '6', 'вчерашние но вкусные');
+
+INSERT INTO doughnut_ratings
+(location, time, date, type, rating, comments)
+VALUES
+('Starbuzz Coffee', '22:35', '24/4', 'с глазурью', '7', 'теплые но не горячие');
+
+INSERT INTO doughnut_ratings
+(location, time, date, type, rating, comments)
+VALUES
+('Krispy King', '21:39', '26/9', 'с вареньем', '6', 'мало варенья');
+
+INSERT INTO doughnut_ratings
+(location, time, date, type, rating, comments)
+VALUES
+('Starbuzz Coffee', '7:48', '23/4', 'шоколадный кекс', '10', 'с зефиром');
+
+INSERT INTO doughnut_ratings
+(location, time, date, type, rating, comments)
+VALUES
+('Krispy King', '20:56', '25/11', 'с глазурью', '8', 'кленовый сироп');
+
+SELECT location, type
+FROM doughnut_ratings
+WHERE rating > 6;
+
+SELECT location FROM doughnut_ratings
+WHERE type = 'с глазурью'
+AND rating > 6;
+
+SELECT email FROM my_contacts
+WHERE profession = 'Писатель'
+AND name = 'Джиллиан';
+
+SELECT drink_name FROM easy_drinks
+WHERE main = 'содовая'
+AND amount1 > 1;
+
+SELECT drink_name FROM easy_drinks
+WHERE main = 'вишневый сок'
+OR second = 'вишневый сок';
+
+SELECT drink_name FROM easy_drinks
+WHERE calories IS NULL;
+
+SELECT calories FROM easy_drinks
+WHERE drink_name = 'Дыхание дракона';
+
+SELECT * FROM my_contacts
+WHERE location LIKE '%Аль%';
+
+SELECT drink_name FROM easy_drinks
+WHERE
+calories BETWEEN 30 AND 60; // Включительно оба значения
+
+
+SELECT date_name
+FROM black_book
+WHERE rating IN
+('оригинально', 'потрясающе', 'восхитительно', 'неплохо');
+
+SELECT date_name
+FROM black_book
+WHERE rating NOT IN
+('оригинально', 'потрясающе', 'восхитительно', 'неплохо');
+
+SELECT drink_name FROM drink_info
+WHERE NOT carbs BETWEEN 3 AND 5;
+
+SELECT date_name FROM black_book
+WHERE NOT date_name LIKE 'A%'
+AND NOT date_name LIKE 'Б%';
+
+CREATE TABLE clown_info
+(
+	name VARCHAR(30),
+	last_seen VARCHAR(50),
+	appearance BLOB,
+	activities VARCHAR(50)
+);
+
+INSERT INTO clown_info
+(name, last_seen, appearance, activities)
+VALUES
+('Элси', 'Дом престарелых Черри Хилл', 'Ж, рыжие волосы, зеленый костюм, огромные ботинки', 'шарики, машинки');
+
+INSERT INTO clown_info
+(name, last_seen, appearance, activities)
+VALUES
+('Пиклз', 'Вечеринка Джека Грина', 'М, оранжевые волосы, синий костюм, огромные ботинки', 'мим');
+
+INSERT INTO clown_info
+(name, last_seen, appearance, activities)
+VALUES
+('Снаглз', 'Болмарт', 'Ж, желтая рубашка, красные штаны', 'рожок, зонтик');
+
+INSERT INTO clown_info
+(name, last_seen, appearance, activities)
+VALUES
+('Мистер Хобо', 'Цирк BG', 'М, сигара, черные волосы, маленькая шляпа', 'скрипка');
+
+INSERT INTO clown_info
+(name, last_seen, appearance, activities)
+VALUES
+('Кларабелл', 'Дом престарелых Бельмонт', 'Ж, розовые волосы, большой цветок, синее платье', 'кричалки, танцы');
+
+INSERT INTO clown_info
+(name, last_seen, appearance, activities)
+VALUES
+('Скутер', 'Больница Окленд', 'М, синие волосы, красный костюм, большой нос', 'шарики');
+
+INSERT INTO clown_info
+(name, last_seen, appearance, activities)
+VALUES
+('Зиппо', 'Торговый центр Милстоун', 'Ж, оранжевый костюм, штаны', 'танцы');
+
+INSERT INTO clown_info
+(name, last_seen, appearance, activities)
+VALUES
+('Бэйб', 'Атошкола Эрла', 'Ж, розовый костюм с блестками', 'эквилибристика, машинки');
+
+INSERT INTO clown_info
+(name, last_seen, appearance, activities)
+VALUES
+('Бонзо', '', 'Женское платье в горошек', 'пение, танцы');
+
+INSERT INTO clown_info
+(name, last_seen, appearance, activities)
+VALUES
+('Снифлз', 'Заведение Трейси', 'М, зелено-фиолетовый костюм, длинный нос', '');
+
+
+ DELETE FROM clown_info; // удалит все записи таблицы
+
+ DELETE FROM clown_info WHERE activities = 'танцы';
+
+ UPDATE doughnut_ratings
+ SET
+ type = 'глазированные'
+ WHERE type = 'с глазурью';
+
+UPDATE drink_info
+SET cost = cost + 1;
+WHERE drink_name = 'Голубая лагуна'
+OR
+drink_name = 'Вот тебе на'
+OR
+drink_name = 'Лаймовый физз';
+
+CREATE TABLE my_table
+(
+	id INT NOT NULL AUTO_INCREMENT,
+	first_name VARCHAR(30) NOT NULL,
+	last_name VARCHAR(30) NOT NULL,
+	PRIMARY KEY (id)
+);
+
+INSERT INTO my_table
+(id, first_name, last_name)
+VALUES
+(NULL, 'Марсия', 'Брэди');
+
+INSERT INTO my_table
+(id, first_name, last_name)
+VALUES
+(1, 'Джен', 'Брэди');
+
+INSERT INTO my_table
+VALUES
+('', 'Бобби', 'Брэди');
+
+INSERT INTO my_table
+(first_name, last_name)
+VALUES
+('Синди', 'Брэди');
+
+INSERT INTO my_table
+(id, first_name, last_name)
+VALUES
+(99, 'Питер', 'Брэди');
+
+ALTER TABLE my_contacts
+ADD COLUMN contact_id INT NOT NULL AUTO_INCREMENT FIRST,
+ADD PRIMARY KEY (contact_id);
+
+ALTER TABLE my_contacts
+ADD COLUMN phone VARCHAR(14) NOT NULL
+AFTER first_name;
+
+ALTER TABLE my_table
+RENAME TO test_table;
+
+ALTER TABLE clown_info
+CHANGE COLUMN last_seen last_place VARCHAR(50),
+ADD COLUMN id INT NOT NULL AUTO_INCREMENT FIRST;
+
+ALTER TABLE my_table
+MODIFY COLUMN first_name VARCHAR (100);
+
+ALTER TABLE my_table
+DROP COLUMN last_name;
+
+CREATE TABLE hooptie
+(
+	color VARCHAR (20),
+	year VARCHAR (4),
+	make VARCHAR (20),
+	mo VARCHAR (20),
+	howmuch VARCHAR (10)
+);
+
+INSERT INTO hooptie
+(color, year, make, mo, howmuch)
+VALUES
+('серебристый', '1998', 'Porche', 'Boxter', '17992.540');
+
+INSERT INTO hooptie
+(color, year, make, mo, howmuch)
+VALUES
+('NULL', '2000', 'Jaguar', 'XJ', '15995');
+
+INSERT INTO hooptie
+(color, year, make, mo, howmuch)
+VALUES
+('красный', '2002', 'Cadillac', 'Escalade', '40215.9');
+
+
+ALTER TABLE hooptie
+RENAME TO car_table,
+ADD COLUMN car_id INT NOT NULL AUTO_INCREMENT FIRST,
+ADD PRIMARY KEY (car_id),
+ADD COLUMN VIN VARCHAR(30) AFTER car_id,
+CHANGE COLUMN mo model VARCHAR(30),
+CHANGE COLUMN howmuch price DECIMEL (7, 2);
+
+SELECT mc.first_name firstname, mc.last_name lastname, mc.email email
+FROM my_contacts mc
+WHERE NOT EXISTS
+(SELECT * FROM job_current jc
+WHERE mc.contact_id = jc.contact_id);
+
+SELECT mc.first_name firstname, mc.last_name lastname, mc.email email
+FROM my_contacts mc
+WHERE EXISTS
+(SELECT * FROM contact_interests ci WHERE mc.contact_id = ci.contact_id);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
