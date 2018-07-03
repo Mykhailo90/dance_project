@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: localhost:3306
--- Время создания: Июл 02 2018 г., 09:09
+-- Время создания: Июл 03 2018 г., 09:29
 -- Версия сервера: 5.7.22
 -- Версия PHP: 7.1.18
 
@@ -172,6 +172,7 @@ INSERT INTO `show_members` (`id`, `first_name`, `last_name`, `show_members_id`) 
 CREATE TABLE `show_members_info` (
   `show_members_id` int(11) NOT NULL,
   `show_name` varchar(30) NOT NULL,
+  `presentation_name` varchar(50) DEFAULT NULL,
   `cheef` varchar(30) DEFAULT NULL,
   `school` varchar(30) NOT NULL,
   `city` varchar(30) NOT NULL,
@@ -186,9 +187,9 @@ CREATE TABLE `show_members_info` (
 -- Дамп данных таблицы `show_members_info`
 --
 
-INSERT INTO `show_members_info` (`show_members_id`, `show_name`, `cheef`, `school`, `city`, `email`, `phone`, `foto`, `checking`, `sale`) VALUES
-(1, 'Крутые перцы', 'Лана Вишнякова', 'Chilli-Dance studio', 'Kyiv', '0660330233@ukr.net', '+308730507755', 'http://www.pit4sport.com.ua/wp-content/uploads/2015/12/Pit4Sport_logo-e1449069029336.png', 0, 0),
-(2, 'Очень крутые перцы', 'Василий Вишняков', 'Chilli-Dance studio', 'Kyiv', '0730507755@ukr.net', '+308730507755', 'http://www.pit4sport.com.ua/wp-content/uploads/2015/12/Pit4Sport_logo-e1449069029336.png', 0, 0);
+INSERT INTO `show_members_info` (`show_members_id`, `show_name`, `presentation_name`, `cheef`, `school`, `city`, `email`, `phone`, `foto`, `checking`, `sale`) VALUES
+(1, 'Крутые перцы', 'Веслелый Танец', 'Лана Вишнякова', 'Chilli-Dance studio', 'Kyiv', '0660330233@ukr.net', '+308730507755', 'http://www.pit4sport.com.ua/wp-content/uploads/2015/12/Pit4Sport_logo-e1449069029336.png', 0, 0),
+(2, 'Очень крутые перцы', 'Романтический Танец', 'Василий Вишняков', 'Chilli-Dance studio', 'Kyiv', '0730507755@ukr.net', '+308730507755', 'http://www.pit4sport.com.ua/wp-content/uploads/2015/12/Pit4Sport_logo-e1449069029336.png', 0, 0);
 
 -- --------------------------------------------------------
 
