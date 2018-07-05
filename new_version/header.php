@@ -10,14 +10,14 @@
 </style>
 
 <header>
-    <nav >
-      <div class="nav-wrapper">
+    <nav>
+      <div class="nav-wrapper" id="h1">
        <a href="index.php" class="brand-logo"><img src="./images/Logo-Mini-Chilli-Dnce-small.png"></a>
        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">Меню</i></a>
 
       <ul class="right hide-on-med-and-down">
         <li><a href="#">Конкурс</a></li>
-        <li><a href="#">Учавствовать</a></li>
+        <li><a href="all_categ.php">Учавствовать</a></li>
         <li><a href="#">Судьи</a></li>
         <li><a href="#">Контакты</a></li>
         <?php
@@ -35,7 +35,7 @@
 
   <ul class="sidenav" id="mobile-demo">
     <li><a href="#">Конкурс</a></li>
-    <li><a href="#">Учавствовать</a></li>
+    <li><a href="all_categ.php">Учавствовать</a></li>
     <li><a href="#">Судьи</a></li>
     <li><a href="#">Контакты</a></li>
     <?php
