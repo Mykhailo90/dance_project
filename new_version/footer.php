@@ -1,4 +1,18 @@
-
+<style media="screen">
+  strong{
+    color: white;
+    text-align: center;
+    margin: auto;
+  }
+  .footer-copyright{
+    width: 100%;
+  }
+  .footer-copyright a{
+    width: 100%;
+    text-align: center;
+    margin: auto;
+  }
+</style>
 <footer class="page-footer">
           <div class="container">
             <div class="row">
@@ -16,10 +30,6 @@
             </div>
           </div>
           <div class="footer-copyright">
-            <div class="container">
-            © 2018 msarapii_studio
-            <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
-            </div>
+              <a href="https://www.facebook.com/profile.php?id=100001749961535"><strong>© 2018 msarapii_studio</strong></a>
           </div>
 </footer>
-            

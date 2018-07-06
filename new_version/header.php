@@ -8,7 +8,10 @@
     display: block;
   }
 </style>
-
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
+ <script src="./js/all.js"></script>
 <header>
     <nav>
       <div class="nav-wrapper" id="h1">
@@ -16,8 +19,17 @@
        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">Меню</i></a>
 
       <ul class="right hide-on-med-and-down">
-        <li><a href="#">Конкурс</a></li>
-        <li><a href="all_categ.php">Учавствовать</a></li>
+        <li><a href="index.php">Конкурс</a></li>
+        <?php
+                  $a = '<li><a href="generat_room.php" title="моя страница">Мой кабинет</a></li>';
+                  $b = '<li><a href="participate.php">Учавствовать</a></li>';
+                  if (isset($_SESSION['name']) && $_SESSION['name'] != "")
+                    echo  $a;
+                  else {
+                    echo $b;
+                  }
+        ?>
+
         <li><a href="#">Судьи</a></li>
         <li><a href="#">Контакты</a></li>
         <?php
@@ -34,8 +46,16 @@
      </nav>
 
   <ul class="sidenav" id="mobile-demo">
-    <li><a href="#">Конкурс</a></li>
-    <li><a href="all_categ.php">Учавствовать</a></li>
+    <li><a href="index.php">Конкурс</a></li>
+    <?php
+              $a = '<li><a href="generat_room.php" title="моя страница">Мой кабинет</a></li>';
+              $b = '<li><a href="participate.php">Учавствовать</a></li>';
+              if (isset($_SESSION['name']) && $_SESSION['name'] != "")
+                echo  $a;
+              else {
+                echo $b;
+              }
+    ?>
     <li><a href="#">Судьи</a></li>
     <li><a href="#">Контакты</a></li>
     <?php
