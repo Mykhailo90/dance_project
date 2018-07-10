@@ -13,7 +13,11 @@ function create_input(){
 // При загрузке страницы будут активированы выпадающие списки для моб версии
 
  $(document).ready(function(){
+
      $('select').formSelect();
+
+
+
      $("#school").change(function(){
 
        if ($( "#school" ).val() == "enter_school"){
@@ -26,8 +30,9 @@ function create_input(){
 // Задается значение по нажатию кнопки Без Школы
 
 function w3s(){
-  document.getElementById("school").value = "none";
+  document.getElementById("school_name").value = "none";
   document.getElementById("u1").classList.add("unvis");
+
 }
 
 // Функция минимальной валидации полей ввода информации
@@ -49,14 +54,10 @@ function w3s(){
 ){
     document.getElementById("reg_btn").classList.remove('disabled');
     document.getElementById("btn2").classList.add("unvis");
+
     document.getElementById("u1").classList.remove('unvis');
-    $('#first_name').prop('disabled',true);
-    $('#last_name').prop('disabled',true);
-    $('#city').prop('disabled',true);
-    $('#email').prop('disabled',true);
-    $('#phone').prop('disabled',true);
-    $('#password').prop('disabled',true);
-    $('#password2').prop('disabled',true);
+    document.getElementById("u2").classList.remove('unvis');
+    document.getElementById("u3").classList.remove('unvis');
   }
   else {
     if (document.getElementById("first_name").value == "")
@@ -127,13 +128,28 @@ function w3s(){
     max-width: 700px;
     margin: auto;
   }
+  #u2 label{
+    margin-left: 50px;
+    vertical-align: top;
+  }
+  #foto{
+    margin-top: 20px;
+  }
+
+  ::-webkit-file-upload-button {
+    background: red;
+    color: white;
+    padding: 1em;
+  }
+
+
 </style>
 
 
  <main>
    <h1>Регистрационная форма</h1>
    <div class="row" id="base">
-   <form id="reg" class="col s12" action="reg.php" method="post">
+   <form id="reg" class="col s12" action="reg.php" method="post" enctype="multipart/form-data">
      <div class="row">
        <div class="input-field col s12 l6 m12 xl6">
          <input form="reg" placeholder="Ваше имя" id="first_name" name="first_name" type="text" class="validate">
@@ -172,6 +188,26 @@ function w3s(){
          <div class="input-field col s12 l6 m12 xl6">
              <a id="btn2" onclick="validate_form()" class="waves-effect waves-light btn-large">Подтвердить</a>
          </div>
+         <div id="u2" class="input-field col s12 l6 m12 xl6 unvis">
+           <div class="col s6 l4 m4 offset-m2 xl4">
+           <label>
+              <input name="femine" type="radio" value="M" checked />
+              <span class="w">Мужчина</span>
+            </label>
+          </div>
+          <div class="col s6 l2 m6 xl2">
+            <label>
+              <input name="femine" type="radio" value="Ж" />
+              <span class="w">Женщина</span>
+            </label>
+          </div>
+         </div>
+     </div>
+     <div id="u3" class="row unvis">
+       <div class="col s10 offset-s2 m9 offset-m3">
+         <label for="foto"><strong class="w">Загрузить фотографию</strong></label><br>
+         <input form="reg" id="foto" name="foto[]" type="file">
+       </div>
      </div>
      <div id="u1" class="row unvis s12">
        <div class="input-field col s8">
@@ -203,7 +239,7 @@ function w3s(){
 
       <option id="enter_school" value="enter_school">Добавить школу</option>
     </select>
-    <label>Выбор школы</label>
+    <label><strong class="w">Выбор школы</strong></label>
   </div>
        <div class="input-field col s4">
            <a id="btnX" onclick="w3s()" class="waves-effect waves-light btn-large">Без школы</a>
