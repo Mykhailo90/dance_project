@@ -87,6 +87,25 @@ elseif ($_POST['school'] == "enter_school") {
   $school_name = htmlspecialchars($school_name);
 }
 
+$city = trim($city);
+
+if (!isset($school_name))
+{
+  $school_id = stripslashes($_POST['school']);
+  $school_id = htmlspecialchars($_POST['school']);
+}
+else {
+  $school_name = trim($school_name);
+
+  require_once 'db_connect.php';
+
+  $sql = "INSERT INTO schools
+  (name, city)
+  VALUES ('$school_name', '$city')";
+  $result = mysqli_query ($db, $sql);
+  $school_id = mysql_insert_id();
+}
+
 $first_name = trim($first_name);
 $last_name = trim($last_name);
 $password = trim($password);
@@ -94,8 +113,8 @@ $password2 = trim($password2);
 $password = password_hash($password, PASSWORD_DEFAULT);
 $email = trim($email);
 $phone = trim($phone);
-$city = trim($city);
-$school_name = trim($school_name);
+
+
 $femine = trim($femine);
 
 //Выгрузка фото на сервер
@@ -123,8 +142,27 @@ $foto = stripslashes($foto);
 $foto = htmlspecialchars($foto);
 $foto_path = $uploads_dir.'/'.$name;
 
+// Загрузить все данные в БД
+
+    $sql = "INSERT INTO members_info
+    (first_name, last_name, gender, city, school_id, password, email, phone, foto)
+    VALUES ('$first_name','$last_name', '$femine', '$city', '$school_id', '$password', '$email', '$phone', '$foto_path')";
+    $result = mysqli_query ($db, $sql);
 
 
-echo "$first_name<br>$last_name<br>$email<br>$phone<br>$city<br>$password<br>$password2<br>$school_name<br>$foto<br>$foto_path";
+    if ($result=='TRUE')
+    {
+      echo "Все хорошо!";
+      // $_SESSION['name'] = $login;
+      // setcookie('name', $_SESSION[name], time() + (86400 * 30), "/");
+      // header('Location: index.php');
+    }
+    else {
+      echo "Ошибка! Вы не зарегистрированы.";
+   }
+
+
+
+// echo "$first_name<br>$last_name<br>$email<br>$phone<br>$city<br>$password<br>$password2<br>$school_name<br>$foto<br>$foto_path";
 
  ?>

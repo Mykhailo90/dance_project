@@ -230,7 +230,7 @@ function w3s(){
           for ($i = 0 ; $i < $rows; $i++)
           {
             $row = mysqli_fetch_assoc($result);
-            echo '<option value="'.$row['id'].'">'.$row['school_name'].'</option>';
+            echo '<option value="'.$row['id'].'">'.$row['name'].'</option>';
           }
           mysqli_free_result($result);
         }

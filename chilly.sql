@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.1
--- https://www.phpmyadmin.net/
+-- version 4.5.4.1deb2ubuntu2
+-- http://www.phpmyadmin.net
 --
--- Хост: localhost:3306
--- Время создания: Июл 03 2018 г., 09:29
--- Версия сервера: 5.7.22
--- Версия PHP: 7.1.18
+-- Хост: localhost
+-- Время создания: Июл 10 2018 г., 23:40
+-- Версия сервера: 10.0.34-MariaDB-0ubuntu0.16.04.1
+-- Версия PHP: 7.0.30-0ubuntu0.16.04.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -102,14 +100,6 @@ CREATE TABLE `main_info_solo` (
   `id_category` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Дамп данных таблицы `main_info_solo`
---
-
-INSERT INTO `main_info_solo` (`id`, `members_id`, `id_category`) VALUES
-(1, 1, 2),
-(2, 1, 3);
-
 -- --------------------------------------------------------
 
 --
@@ -121,21 +111,32 @@ CREATE TABLE `members_info` (
   `first_name` varchar(30) NOT NULL,
   `last_name` varchar(30) NOT NULL,
   `gender` char(1) DEFAULT NULL,
-  `school` varchar(30) NOT NULL,
   `city` varchar(30) NOT NULL,
+  `school_id` int(11) NOT NULL,
   `email` varchar(30) NOT NULL,
   `phone` varchar(15) NOT NULL,
   `foto` varchar(512) NOT NULL,
-  `checking` int(11) DEFAULT '0',
-  `sale` int(11) DEFAULT '0'
+  `password` varchar(128) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- --------------------------------------------------------
+
 --
--- Дамп данных таблицы `members_info`
+-- Структура таблицы `schools`
 --
 
-INSERT INTO `members_info` (`members_id`, `first_name`, `last_name`, `gender`, `school`, `city`, `email`, `phone`, `foto`, `checking`, `sale`) VALUES
-(1, 'Михаил', 'Сарапий', 'М', 'Chilli-Dance studio', 'Kyiv', '0660330233@ukr.net', '+308730507755', 'http://www.pit4sport.com.ua/wp-content/uploads/2015/12/Pit4Sport_logo-e1449069029336.png', 0, 0);
+CREATE TABLE `schools` (
+  `id` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `city` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Дамп данных таблицы `schools`
+--
+
+INSERT INTO `schools` (`id`, `name`, `city`) VALUES
+(1, 'Chilli Dance Studio', 'Kiyv');
 
 -- --------------------------------------------------------
 
@@ -260,7 +261,14 @@ ALTER TABLE `main_info_solo`
 -- Индексы таблицы `members_info`
 --
 ALTER TABLE `members_info`
-  ADD PRIMARY KEY (`members_id`);
+  ADD PRIMARY KEY (`members_id`),
+  ADD KEY `fk_school_id` (`school_id`);
+
+--
+-- Индексы таблицы `schools`
+--
+ALTER TABLE `schools`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Индексы таблицы `show_members`
@@ -290,49 +298,46 @@ ALTER TABLE `style_info`
 --
 ALTER TABLE `group_members`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
 --
 -- AUTO_INCREMENT для таблицы `group_members_info`
 --
 ALTER TABLE `group_members_info`
   MODIFY `group_members_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
 --
 -- AUTO_INCREMENT для таблицы `main_info_group`
 --
 ALTER TABLE `main_info_group`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
 --
 -- AUTO_INCREMENT для таблицы `main_info_solo`
 --
 ALTER TABLE `main_info_solo`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
 --
 -- AUTO_INCREMENT для таблицы `members_info`
 --
 ALTER TABLE `members_info`
   MODIFY `members_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
+--
+-- AUTO_INCREMENT для таблицы `schools`
+--
+ALTER TABLE `schools`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT для таблицы `show_members`
 --
 ALTER TABLE `show_members`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
 --
 -- AUTO_INCREMENT для таблицы `show_members_info`
 --
 ALTER TABLE `show_members_info`
   MODIFY `show_members_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
 --
 -- AUTO_INCREMENT для таблицы `style_info`
 --
 ALTER TABLE `style_info`
   MODIFY `id_category` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
-
 --
 -- Ограничения внешнего ключа сохраненных таблиц
 --
@@ -358,11 +363,16 @@ ALTER TABLE `main_info_solo`
   ADD CONSTRAINT `style_ifo_id_category_fk` FOREIGN KEY (`id_category`) REFERENCES `style_info` (`id_category`);
 
 --
+-- Ограничения внешнего ключа таблицы `members_info`
+--
+ALTER TABLE `members_info`
+  ADD CONSTRAINT `fk_school_id` FOREIGN KEY (`school_id`) REFERENCES `schools` (`id`);
+
+--
 -- Ограничения внешнего ключа таблицы `show_members`
 --
 ALTER TABLE `show_members`
   ADD CONSTRAINT `show_members_ibfk_1` FOREIGN KEY (`show_members_id`) REFERENCES `show_members_info` (`show_members_id`);
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
