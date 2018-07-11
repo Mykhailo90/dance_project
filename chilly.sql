@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.4.1deb2ubuntu2
--- http://www.phpmyadmin.net
+-- version 4.8.2
+-- https://www.phpmyadmin.net/
 --
--- Хост: localhost
--- Время создания: Июл 10 2018 г., 23:40
--- Версия сервера: 10.0.34-MariaDB-0ubuntu0.16.04.1
--- Версия PHP: 7.0.30-0ubuntu0.16.04.1
+-- Host: localhost:3306
+-- Generation Time: Jul 11, 2018 at 03:01 PM
+-- Server version: 5.7.22
+-- PHP Version: 7.1.19
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -17,13 +19,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- База данных: `chilly`
+-- Database: `chilly`
 --
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `group_members`
+-- Table structure for table `group_members`
 --
 
 CREATE TABLE `group_members` (
@@ -34,7 +36,7 @@ CREATE TABLE `group_members` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Дамп данных таблицы `group_members`
+-- Dumping data for table `group_members`
 --
 
 INSERT INTO `group_members` (`id`, `first_name`, `last_name`, `group_members_id`) VALUES
@@ -46,7 +48,7 @@ INSERT INTO `group_members` (`id`, `first_name`, `last_name`, `group_members_id`
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `group_members_info`
+-- Table structure for table `group_members_info`
 --
 
 CREATE TABLE `group_members_info` (
@@ -61,7 +63,7 @@ CREATE TABLE `group_members_info` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Дамп данных таблицы `group_members_info`
+-- Dumping data for table `group_members_info`
 --
 
 INSERT INTO `group_members_info` (`group_members_id`, `school`, `city`, `email`, `phone`, `foto`, `checking`, `sale`) VALUES
@@ -71,7 +73,7 @@ INSERT INTO `group_members_info` (`group_members_id`, `school`, `city`, `email`,
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `main_info_group`
+-- Table structure for table `main_info_group`
 --
 
 CREATE TABLE `main_info_group` (
@@ -81,7 +83,7 @@ CREATE TABLE `main_info_group` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Дамп данных таблицы `main_info_group`
+-- Dumping data for table `main_info_group`
 --
 
 INSERT INTO `main_info_group` (`id`, `group_members_id`, `id_category`) VALUES
@@ -91,7 +93,7 @@ INSERT INTO `main_info_group` (`id`, `group_members_id`, `id_category`) VALUES
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `main_info_solo`
+-- Table structure for table `main_info_solo`
 --
 
 CREATE TABLE `main_info_solo` (
@@ -103,7 +105,7 @@ CREATE TABLE `main_info_solo` (
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `members_info`
+-- Table structure for table `members_info`
 --
 
 CREATE TABLE `members_info` (
@@ -119,10 +121,18 @@ CREATE TABLE `members_info` (
   `password` varchar(128) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `members_info`
+--
+
+INSERT INTO `members_info` (`members_id`, `first_name`, `last_name`, `gender`, `city`, `school_id`, `email`, `phone`, `foto`, `password`) VALUES
+(12, 'Misha', 'SOLD', 'M', 'Doneck', 5, '0660330233@ukr.net', '+380730507755', './members_images/SOLD_14.jpg', '$2y$10$cJjUm1kl3kE0tCaPD.0h4e33gyuIaik3B6z.13czcj6zKuEeTLh7W'),
+(13, 'Misha', 'Sarapii', 'M', 'Kiyv', 5, '0660330233@ukr.net', '+380730507755', './members_images/Sarapii_15.png', '$2y$10$96m5UZdUdhSgAvVQQENIveVE.8nXAgzGOnth7xmY16zRdr4EXaB56');
+
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `schools`
+-- Table structure for table `schools`
 --
 
 CREATE TABLE `schools` (
@@ -132,16 +142,20 @@ CREATE TABLE `schools` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Дамп данных таблицы `schools`
+-- Dumping data for table `schools`
 --
 
 INSERT INTO `schools` (`id`, `name`, `city`) VALUES
-(1, 'Chilli Dance Studio', 'Kiyv');
+(1, 'none', ''),
+(2, 'Chilli Dance Studio', 'Kiyv'),
+(3, '55ош', 'Doneck'),
+(4, '777', 'Doneck'),
+(5, 'test', 'Doneck');
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `show_members`
+-- Table structure for table `show_members`
 --
 
 CREATE TABLE `show_members` (
@@ -152,7 +166,7 @@ CREATE TABLE `show_members` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Дамп данных таблицы `show_members`
+-- Dumping data for table `show_members`
 --
 
 INSERT INTO `show_members` (`id`, `first_name`, `last_name`, `show_members_id`) VALUES
@@ -167,7 +181,7 @@ INSERT INTO `show_members` (`id`, `first_name`, `last_name`, `show_members_id`) 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `show_members_info`
+-- Table structure for table `show_members_info`
 --
 
 CREATE TABLE `show_members_info` (
@@ -185,7 +199,7 @@ CREATE TABLE `show_members_info` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Дамп данных таблицы `show_members_info`
+-- Dumping data for table `show_members_info`
 --
 
 INSERT INTO `show_members_info` (`show_members_id`, `show_name`, `presentation_name`, `cheef`, `school`, `city`, `email`, `phone`, `foto`, `checking`, `sale`) VALUES
@@ -195,7 +209,7 @@ INSERT INTO `show_members_info` (`show_members_id`, `show_name`, `presentation_n
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `style_info`
+-- Table structure for table `style_info`
 --
 
 CREATE TABLE `style_info` (
@@ -204,7 +218,7 @@ CREATE TABLE `style_info` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Дамп данных таблицы `style_info`
+-- Dumping data for table `style_info`
 --
 
 INSERT INTO `style_info` (`id_category`, `name_category`) VALUES
@@ -225,24 +239,24 @@ INSERT INTO `style_info` (`id_category`, `name_category`) VALUES
 (15, 'Traditional Kizomba Masters');
 
 --
--- Индексы сохранённых таблиц
+-- Indexes for dumped tables
 --
 
 --
--- Индексы таблицы `group_members`
+-- Indexes for table `group_members`
 --
 ALTER TABLE `group_members`
   ADD PRIMARY KEY (`id`),
   ADD KEY `group_members_id` (`group_members_id`);
 
 --
--- Индексы таблицы `group_members_info`
+-- Indexes for table `group_members_info`
 --
 ALTER TABLE `group_members_info`
   ADD PRIMARY KEY (`group_members_id`);
 
 --
--- Индексы таблицы `main_info_group`
+-- Indexes for table `main_info_group`
 --
 ALTER TABLE `main_info_group`
   ADD PRIMARY KEY (`id`),
@@ -250,7 +264,7 @@ ALTER TABLE `main_info_group`
   ADD KEY `id_category` (`id_category`);
 
 --
--- Индексы таблицы `main_info_solo`
+-- Indexes for table `main_info_solo`
 --
 ALTER TABLE `main_info_solo`
   ADD PRIMARY KEY (`id`),
@@ -258,121 +272,131 @@ ALTER TABLE `main_info_solo`
   ADD KEY `style_ifo_id_category_fk` (`id_category`);
 
 --
--- Индексы таблицы `members_info`
+-- Indexes for table `members_info`
 --
 ALTER TABLE `members_info`
   ADD PRIMARY KEY (`members_id`),
   ADD KEY `fk_school_id` (`school_id`);
 
 --
--- Индексы таблицы `schools`
+-- Indexes for table `schools`
 --
 ALTER TABLE `schools`
   ADD PRIMARY KEY (`id`);
 
 --
--- Индексы таблицы `show_members`
+-- Indexes for table `show_members`
 --
 ALTER TABLE `show_members`
   ADD PRIMARY KEY (`id`),
   ADD KEY `show_members_id` (`show_members_id`);
 
 --
--- Индексы таблицы `show_members_info`
+-- Indexes for table `show_members_info`
 --
 ALTER TABLE `show_members_info`
   ADD PRIMARY KEY (`show_members_id`);
 
 --
--- Индексы таблицы `style_info`
+-- Indexes for table `style_info`
 --
 ALTER TABLE `style_info`
   ADD PRIMARY KEY (`id_category`);
 
 --
--- AUTO_INCREMENT для сохранённых таблиц
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT для таблицы `group_members`
+-- AUTO_INCREMENT for table `group_members`
 --
 ALTER TABLE `group_members`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
--- AUTO_INCREMENT для таблицы `group_members_info`
+-- AUTO_INCREMENT for table `group_members_info`
 --
 ALTER TABLE `group_members_info`
   MODIFY `group_members_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
--- AUTO_INCREMENT для таблицы `main_info_group`
+-- AUTO_INCREMENT for table `main_info_group`
 --
 ALTER TABLE `main_info_group`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
--- AUTO_INCREMENT для таблицы `main_info_solo`
+-- AUTO_INCREMENT for table `main_info_solo`
 --
 ALTER TABLE `main_info_solo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
--- AUTO_INCREMENT для таблицы `members_info`
+-- AUTO_INCREMENT for table `members_info`
 --
 ALTER TABLE `members_info`
-  MODIFY `members_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `members_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
 --
--- AUTO_INCREMENT для таблицы `schools`
+-- AUTO_INCREMENT for table `schools`
 --
 ALTER TABLE `schools`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
 --
--- AUTO_INCREMENT для таблицы `show_members`
+-- AUTO_INCREMENT for table `show_members`
 --
 ALTER TABLE `show_members`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
 --
--- AUTO_INCREMENT для таблицы `show_members_info`
+-- AUTO_INCREMENT for table `show_members_info`
 --
 ALTER TABLE `show_members_info`
   MODIFY `show_members_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
--- AUTO_INCREMENT для таблицы `style_info`
+-- AUTO_INCREMENT for table `style_info`
 --
 ALTER TABLE `style_info`
   MODIFY `id_category` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
 --
--- Ограничения внешнего ключа сохраненных таблиц
+-- Constraints for dumped tables
 --
 
 --
--- Ограничения внешнего ключа таблицы `group_members`
+-- Constraints for table `group_members`
 --
 ALTER TABLE `group_members`
   ADD CONSTRAINT `group_members_ibfk_1` FOREIGN KEY (`group_members_id`) REFERENCES `group_members_info` (`group_members_id`);
 
 --
--- Ограничения внешнего ключа таблицы `main_info_group`
+-- Constraints for table `main_info_group`
 --
 ALTER TABLE `main_info_group`
   ADD CONSTRAINT `main_info_group_ibfk_1` FOREIGN KEY (`group_members_id`) REFERENCES `group_members_info` (`group_members_id`),
   ADD CONSTRAINT `main_info_group_ibfk_2` FOREIGN KEY (`id_category`) REFERENCES `style_info` (`id_category`);
 
 --
--- Ограничения внешнего ключа таблицы `main_info_solo`
+-- Constraints for table `main_info_solo`
 --
 ALTER TABLE `main_info_solo`
   ADD CONSTRAINT `members_ifo_members_id_fk` FOREIGN KEY (`members_id`) REFERENCES `members_info` (`members_id`),
   ADD CONSTRAINT `style_ifo_id_category_fk` FOREIGN KEY (`id_category`) REFERENCES `style_info` (`id_category`);
 
 --
--- Ограничения внешнего ключа таблицы `members_info`
+-- Constraints for table `members_info`
 --
 ALTER TABLE `members_info`
   ADD CONSTRAINT `fk_school_id` FOREIGN KEY (`school_id`) REFERENCES `schools` (`id`);
 
 --
--- Ограничения внешнего ключа таблицы `show_members`
+-- Constraints for table `show_members`
 --
 ALTER TABLE `show_members`
   ADD CONSTRAINT `show_members_ibfk_1` FOREIGN KEY (`show_members_id`) REFERENCES `show_members_info` (`show_members_id`);
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

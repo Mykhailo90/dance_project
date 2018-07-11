@@ -86,6 +86,9 @@ elseif ($_POST['school'] == "enter_school") {
   $school_name = stripslashes($_POST['school_name']);
   $school_name = htmlspecialchars($school_name);
 }
+elseif ($_POST['school_name'] == "none") {
+  $school_name = "none";
+}
 
 $city = trim($city);
 
@@ -93,6 +96,9 @@ if (!isset($school_name))
 {
   $school_id = stripslashes($_POST['school']);
   $school_id = htmlspecialchars($_POST['school']);
+}
+elseif ($school_name == "none"){
+  $school_id = 1;
 }
 else {
   $school_name = trim($school_name);
@@ -103,7 +109,8 @@ else {
   (name, city)
   VALUES ('$school_name', '$city')";
   $result = mysqli_query ($db, $sql);
-  $school_id = mysql_insert_id();
+  $school_id = mysqli_insert_id($db);
+  // mysqli_close($db);
 }
 
 $first_name = trim($first_name);
@@ -113,8 +120,6 @@ $password2 = trim($password2);
 $password = password_hash($password, PASSWORD_DEFAULT);
 $email = trim($email);
 $phone = trim($phone);
-
-
 $femine = trim($femine);
 
 //Выгрузка фото на сервер
@@ -144,18 +149,26 @@ $foto_path = $uploads_dir.'/'.$name;
 
 // Загрузить все данные в БД
 
+// echo "<br>$first_name<br>$last_name<br>$email<br>$phone<br>$city<br>$password<br>$password2<br>$school_id<br>$foto<br>$foto_path<br>$school_name<br>";
+
+    if (!isset($db))
+      require_once 'db_connect.php';
+
     $sql = "INSERT INTO members_info
     (first_name, last_name, gender, city, school_id, password, email, phone, foto)
     VALUES ('$first_name','$last_name', '$femine', '$city', '$school_id', '$password', '$email', '$phone', '$foto_path')";
     $result = mysqli_query ($db, $sql);
-
+    $user_id = mysqli_insert_id($db);
+    mysqli_close($db);
 
     if ($result=='TRUE')
     {
-      echo "Все хорошо!";
-      // $_SESSION['name'] = $login;
-      // setcookie('name', $_SESSION[name], time() + (86400 * 30), "/");
-      // header('Location: index.php');
+      // echo "Все хорошо!";
+      $_SESSION['name'] = $first_name;
+      $_SESSION['user_id'] = $user_id;
+      setcookie('name', $_SESSION[name], time() + (86400 * 30), "/");
+      setcookie('user_id', $_SESSION[user_id], time() + (86400 * 30), "/");
+      header('Location: index.php');
     }
     else {
       echo "Ошибка! Вы не зарегистрированы.";

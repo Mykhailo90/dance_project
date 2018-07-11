@@ -29,7 +29,6 @@
                     echo $b;
                   }
         ?>
-
         <li><a href="#">Судьи</a></li>
         <li><a href="#">Контакты</a></li>
         <?php
